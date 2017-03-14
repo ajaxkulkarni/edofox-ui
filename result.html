@@ -34,6 +34,16 @@
         .wrapper {
             margin: 2%;
         }
+        
+        .correct {
+            #color: green;
+            background-color: aquamarine;
+            font-weight: 500;
+        }
+        
+        .choice {
+            font-weight: 800;
+        }
 
     </style>
 </head>
@@ -45,20 +55,20 @@
         <div class="form-group row">
             <div class="col-md-6">
                 <label for="sel1">Subject:</label>
-                <select class="form-control" id="sel1" style="width:40%">
-                <option>All</option>
-                  <option>Physics</option>
-                <option>Chemistry</option>
-                <option>Biology</option>
+                <select class="form-control" id="sel1" style="width:40%" ng-model="subject">
+                <option value="All">All</option>
+                  <option value="Physics">Physics</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Biology">Biology</option>
               </select>
             </div>
             <div class="col-md-6">
                 <label for="sel1">Questions:</label>
-                <select class="form-control" id="sel1" style="width:40%">
-                <option>All</option>
-                <option>Correct</option>
-                <option>Wrong</option>
-                 <option>Unattempted</option>
+                <select class="form-control" id="sel1" style="width:40%" ng-model="questionType">
+                <option value="All">All</option>
+                <option value="Correct">Correct</option>
+                <option value="Wrong">Wrong</option>
+                 <option value="Unsolved">Unattempted</option>
               </select>
             </div>
         </div>
@@ -72,25 +82,25 @@
                     <th>option2</th>
                     <th>option3</th>
                     <th>option4</th>
-                    <th>Option selected</th>
-                    <th>Correct option</th>
+                    <!--<th>Option selected</th>
+                    <th>Correct option</th>-->
                     <!--  <th>Result</th>-->
-                    <th>Chapter</th>
+                    <!--<th>Chapter</th>-->
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="q in response.student.test.test">
+                <tr ng-repeat="q in response.student.test.test" ng-show="(subject == 'All' || q.subject == subject) && (questionType == 'All' || questionType == getQuestionType(q))">
                     <td>{{$index + 1}}</td>
                     <th>{{q.subject}}</th>
                     <td>{{q.question}}</td>
-                    <td>{{q.option1}}</td>
-                    <td>{{q.option2}}</td>
-                    <td>{{q.option3}}</td>
-                    <td>{{q.option4}}</td>
-                    <td>{{q.response}}</td>
-                    <td>{{q.answer}}</td>
+                    <td ng-class="getClass(q,'option1')">{{q.option1}}</td>
+                    <td ng-class="getClass(q,'option2')">{{q.option2}}</td>
+                    <td ng-class="getClass(q,'option3')">{{q.option3}}</td>
+                    <td ng-class="getClass(q,'option4')">{{q.option4}}</td>
+                    <!--<td>{{q.response}}</td>
+                    <td>{{q.answer}}</td>-->
                     <!--   <td>{{q.result}}</td>-->
-                    <th>{{q.chapter.chapterName}}</th>
+                    <!--<th>{{q.chapter.chapterName}}</th>-->
                 </tr>
             </tbody>
         </table>

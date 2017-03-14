@@ -31,8 +31,31 @@ app.controller('testResults', function ($scope, userService, $location) {
     };
     $scope.student.id = 32;
     $scope.student.test.id = "edofox129";
+    $scope.subject = 'All';
+    $scope.questionType = 'All';
 
-
+    $scope.getClass = function(question,option) {
+        var css = "";
+        if(question.response == option) {
+            css = "choice";
+        }
+        if(question.answer == option) {
+            css = css + " correct";
+        }
+        return css;
+    }
+    
+    $scope.getQuestionType = function(question) {
+        if(!question.response) {
+            return "Unsolved";
+        }
+        if(question.result == 1 || (question.response == question.answer)) {
+            return "Correct";
+        }
+        return "Wrong";
+    }
+    
+    
     $scope.getTestResult = function () {
         userService.showLoading($scope);
         $scope.dataObj.student = $scope.student;
