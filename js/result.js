@@ -41,7 +41,11 @@ app.controller('testResults', function ($scope, userService, $location) {
             css = "choice";
         }
         if (question.answer == option) {
-            css = css + " correct";
+            if (css == "choice") {
+                css = "correct";
+            } else {
+                css = css + " correct";
+            }
         }
         return css;
     }

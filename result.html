@@ -91,7 +91,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="q in response.student.test.test | filter:filterQuestion as filtered" >
+                <tr ng-repeat="q in response.student.test.test" ng-show="filterQuestion(q)" >
                     <td>{{$index + 1}}</td>
                     <th>{{q.subject}}</th>
                     <td>{{q.question}}</td>
