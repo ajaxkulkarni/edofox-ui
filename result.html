@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Test Results</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+
+    <script type="text/javascript" src="js/angular-route.js"></script>
+
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <script type="text/javascript" src="js/result.js"></script>
+    <!--<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>-->
+    <!--<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+
+
+    </script>-->
+    <style>
+        .wrapper {
+            margin: 2%;
+        }
+
+    </style>
+</head>
+
+<body ng-app="app" ng-controller="testResults">
+
+    <div class="wrapper">
+
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label for="sel1">Subject:</label>
+                <select class="form-control" id="sel1" style="width:40%">
+                <option>All</option>
+                  <option>Physics</option>
+                <option>Chemistry</option>
+                <option>Biology</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+                <label for="sel1">Questions:</label>
+                <select class="form-control" id="sel1" style="width:40%">
+                <option>All</option>
+                <option>Correct</option>
+                <option>Wrong</option>
+                 <option>Unattempted</option>
+              </select>
+            </div>
+        </div>
+        <table class="table-responsive table-bordered table-striped " id="results" ng-show="dataLoaded">
+            <thead>
+                <tr>
+                    <th>Sr. No.</th>
+                    <th>Subject</th>
+                    <th>Question</th>
+                    <th>option1</th>
+                    <th>option2</th>
+                    <th>option3</th>
+                    <th>option4</th>
+                    <th>Option selected</th>
+                    <th>Correct option</th>
+                    <!--  <th>Result</th>-->
+                    <th>Chapter</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="q in response.student.test.test">
+                    <td>{{$index + 1}}</td>
+                    <th>{{q.subject}}</th>
+                    <td>{{q.question}}</td>
+                    <td>{{q.option1}}</td>
+                    <td>{{q.option2}}</td>
+                    <td>{{q.option3}}</td>
+                    <td>{{q.option4}}</td>
+                    <td>{{q.response}}</td>
+                    <td>{{q.answer}}</td>
+                    <!--   <td>{{q.result}}</td>-->
+                    <th>{{q.chapter.chapterName}}</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</body>
+
+</html>
