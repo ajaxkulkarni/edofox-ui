@@ -12,7 +12,7 @@ function loadMathJax() {
     script.type = "text/javascript";
     script.src = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     head.appendChild(script);
-    L
+
 }
 
 var app = angular.module("app");
@@ -33,29 +33,40 @@ app.controller('testResults', function ($scope, userService, $location) {
     $scope.student.test.id = "edofox129";
     $scope.subject = 'All';
     $scope.questionType = 'All';
+    $scope.count = 0;
 
-    $scope.getClass = function(question,option) {
+    $scope.getClass = function (question, option) {
         var css = "";
-        if(question.response == option) {
+        if (question.response == option) {
             css = "choice";
         }
-        if(question.answer == option) {
+        if (question.answer == option) {
             css = css + " correct";
         }
         return css;
     }
-    
-    $scope.getQuestionType = function(question) {
-        if(!question.response) {
+
+    $scope.filterQuestion = function (q) {
+        var result = ($scope.subject == 'All' || q.subject == $scope.subject) && ($scope.questionType == 'All' || $scope.questionType == $scope.getQuestionType(q));
+        return result;
+    }
+
+    $scope.getQuestionType = function (question) {
+        if (!question.response) {
             return "Unsolved";
         }
-        if(question.result == 1 || (question.response == question.answer)) {
+        if (question.result == 1 || (question.response == question.answer)) {
             return "Correct";
         }
         return "Wrong";
     }
-    
-    
+
+    /*$scope.customFilter = function (data) {
+        var result = ($scope.subject == 'All' || q.subject == $scope.subject) && ($scope.questionType == 'All' || $scope.questionType == getQuestionType(q));
+        return result;
+    };*/
+
+
     $scope.getTestResult = function () {
         userService.showLoading($scope);
         $scope.dataObj.student = $scope.student;

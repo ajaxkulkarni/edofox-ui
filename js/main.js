@@ -7,7 +7,6 @@ var rootAdmin = host + "/adminService";
 
 
 
-
 app.service('userService', function ($http, $q) {
 
     var response = {};
